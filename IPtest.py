@@ -3,8 +3,7 @@ import random
 
 def getip():
     """Welcome the user and ask for an IP-address and mask to work with. Or make a random one"""
-    print("Welcome! Type a valid IP address to be tested on,")
-    print("or type 'R' to randomize one.")
+    print("Welcome! Type a valid IP address to be tested on,or type 'R' to randomize one.")
     testip = {'addr': '0', 'mask': '0'}
     while True:
         testip['addr'] = input("IP-address:")
@@ -14,7 +13,15 @@ def getip():
             oct3 = str(random.randint(0, 255))
             oct4 = str(random.randint(0, 255))
             testip['addr'] = oct1 + "." + oct2 + "." + oct3 + "." + oct4
-            testip['mask'] = "/" + str(random.randint(1, 32))
+
+           #Making a (hopefully) valid netmask
+            while True:
+                testip['mask'] = "/" + str(random.randint(1, 32))
+                try:
+                    testing_with_this_nonsense_string = str(ip.ip_network(testip['addr'] + testip['mask'], strict=False))
+                    break
+                except ValueError:
+                    pass
             break
         else:
             while True:
@@ -28,7 +35,7 @@ def getip():
             while True:
                 """Get a netmask valid for the address"""
                 try:
-                    testip['mask'] = "/" + input("Netmask: ")
+                    testip['mask'] = "/" + input("Netmask in CIDR (number of binary 1's): ")
                     testing_with_this_nonsense_string = str(ip.ip_network(testip['addr'] + testip['mask'], strict=False))
                     break
                 except ValueError:
@@ -49,6 +56,24 @@ def test(addr, mask):
     last_host = all_hosts[-1]
     broadcast = nw.broadcast_address
     error = 0
+    reserved = 'n'
+    reserved_reason = 'valid'
+    if nw.is_reserved:
+        reserved = 'y'
+        reserved_reason = 'reserved for som weird shit'
+
+    if nw.is_loopback:
+        reserved = 'y'
+        reserved_reason = 'reserved for loopback interfaces'
+
+    if nw.is_private:
+        reserved = 'y'
+        reserved_reason = 'reserved for private use'
+
+    if nw.is_multicast:
+        reserved = 'y'
+        reserved_reason = 'reserved for multicast'
+
     pre = ("(" + str(addr) + ") ")
 
     print("For the IP-address: " + str(addr) + mask + " type in the  following information:")
@@ -62,9 +87,8 @@ def test(addr, mask):
             print("Nope.")
             error += 1
 
-#I need to check how the user inputted the mask 
     while True:
-        answer = input(pre + "What is the netmask in decimal form?: ")
+        answer = input(pre + "What is the netmask in dotted decimal form?: ")
         if answer == str(netmask):
             print("It is!")
             break
@@ -107,6 +131,21 @@ def test(addr, mask):
         else:
             print("Nope.")
             error += 1
+
+
+
+
+    while True:
+        answer = input("Is the address valid for use on the internet? Y/N: ")
+        if answer.lower() != reserved:
+            print('You really know your shit dude!')
+            break
+        else:
+            print("Sorry man, that address is " + reserved_reason + ".")
+            print("But you still did good!")
+            break
+
+
 
 
 
