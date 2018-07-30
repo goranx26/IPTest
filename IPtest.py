@@ -8,14 +8,13 @@ def getip():
     testip = {'addr': '0', 'mask': '0'}
     while True:
         testip['addr'] = input("IP-address:")
-        #Not so random yet.....
         if testip['addr'].lower() == 'r':
-            oct1 = '192'
-            oct2 = '168'
-            oct3 = '1'
-            oct4 = '1'
+            oct1 = str(random.randint(1, 239))
+            oct2 = str(random.randint(0, 255))
+            oct3 = str(random.randint(0, 255))
+            oct4 = str(random.randint(0, 255))
             testip['addr'] = oct1 + "." + oct2 + "." + oct3 + "." + oct4
-            testip['mask'] = '/24'
+            testip['mask'] = "/" + str(random.randint(1, 32))
             break
         else:
             while True:
