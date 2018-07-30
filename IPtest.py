@@ -8,6 +8,7 @@ def getip():
     testip = {'addr': '0', 'mask': '0'}
     while True:
         testip['addr'] = input("IP-address:")
+        #Not so random yet.....
         if testip['addr'].lower() == 'r':
             oct1 = '192'
             oct2 = '168'
@@ -29,7 +30,7 @@ def getip():
                 """Get a netmask valid for the address"""
                 try:
                     testip['mask'] = "/" + input("Netmask: ")
-                    testingwiththisnonsensestring = str(ip.ip_network(testip['addr'] + testip['mask'], strict=False))
+                    testing_with_this_nonsense_string = str(ip.ip_network(testip['addr'] + testip['mask'], strict=False))
                     break
                 except ValueError:
                     print("You need to provide a valid netmask: ")
@@ -49,7 +50,7 @@ def test(addr, mask):
     last_host = all_hosts[-1]
     broadcast = nw.broadcast_address
     error = 0
-    pre = ("(" + str(nw) + ") ")
+    pre = ("(" + str(addr) + ") ")
 
     print("For the IP-address: " + str(addr) + mask + " type in the  following information:")
 
@@ -101,13 +102,13 @@ def test(addr, mask):
     while True:
         answer = input(pre + "What is the broadcast address for the network?: ")
         if answer == str(broadcast):
-            print("Indeed!")
+            print("YOU RULE!!!")
             break
         else:
             print("Nope.")
             error += 1
 
-print("YOU RULE!!!")
+
 
 
 def main():
@@ -115,7 +116,6 @@ def main():
     testip = getip()
     addr = testip['addr']
     mask = testip['mask']
-
 
     test(addr, mask)
 
