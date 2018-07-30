@@ -18,7 +18,7 @@ def getip():
             while True:
                 testip['mask'] = "/" + str(random.randint(1, 32))
                 try:
-                    testing_with_this_nonsense_string = str(ip.ip_network(testip['addr'] + testip['mask'], strict=False))
+                    testing_with_a_nonsense_string = str(ip.ip_network(testip['addr'] + testip['mask'], strict=False))
                     break
                 except ValueError:
                     pass
@@ -36,7 +36,7 @@ def getip():
                 """Get a netmask valid for the address"""
                 try:
                     testip['mask'] = "/" + input("Netmask in CIDR (number of binary 1's): ")
-                    testing_with_this_nonsense_string = str(ip.ip_network(testip['addr'] + testip['mask'], strict=False))
+                    testing_with_a_nonsense_string = str(ip.ip_network(testip['addr'] + testip['mask'], strict=False))
                     break
                 except ValueError:
                     print("You need to provide a valid netmask: ")
@@ -120,7 +120,7 @@ def test(addr, mask):
             print("YES!")
             break
         else:
-            print("Not really.")
+            print("No it doesn't.")
             error += 1
 
     while True:
@@ -132,17 +132,14 @@ def test(addr, mask):
             print("Nope.")
             error += 1
 
-
-
-
     while True:
-        answer = input("Is the address valid for use on the internet? Y/N: ")
+        answer = input("Oh, and by the way, is the address valid for use on the internet? Y/N: ")
         if answer.lower() != reserved:
             print('You really know your shit dude!')
             break
         else:
             print("Sorry man, that address is " + reserved_reason + ".")
-            print("But you still did good!")
+            print("But you're still good!")
             break
 
 
