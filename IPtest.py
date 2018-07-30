@@ -62,6 +62,7 @@ def test(addr, mask):
             print("Nope.")
             error += 1
 
+#I need to check how the user inputted the mask 
     while True:
         answer = input(pre + "What is the netmask in decimal form?: ")
         if answer == str(netmask):
