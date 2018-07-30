@@ -1,6 +1,7 @@
 import ipaddress as ip
 import random
 
+
 def getip():
     """Welcome the user and ask for an IP-address and mask to work with. Or make a random one"""
     print("Welcome! Type a valid IP address to be tested on,or type 'R' to randomize one.")
@@ -14,7 +15,7 @@ def getip():
             oct4 = str(random.randint(0, 255))
             testip['addr'] = oct1 + "." + oct2 + "." + oct3 + "." + oct4
 
-           #Making a (hopefully) valid netmask
+            #THIS IS NO GOOD
             while True:
                 testip['mask'] = "/" + str(random.randint(1, 32))
                 try:
@@ -83,6 +84,9 @@ def test(addr, mask):
         if answer == str(networkID):
             print("Correct!")
             break
+        elif answer == 'i suck':
+            show_all(addr, mask)
+            break
         else:
             print("Nope.")
             error += 1
@@ -118,30 +122,54 @@ def test(addr, mask):
         answer = input(pre + "How many possible host does that make?: ")
         if answer == str(nr_hosts):
             print("YES!")
-            break
+            end
         else:
             print("No it doesn't.")
             error += 1
 
-    while True:
-        answer = input(pre + "What is the broadcast address for the network?: ")
-        if answer == str(broadcast):
-            print("YOU RULE!!!")
-            break
-        else:
-            print("Nope.")
-            error += 1
+        while True:
+            answer = input(pre + "What is the broadcast address for the network?: ")
+            if answer == str(broadcast):
+                print("YOU RULE!!!")
+                break
+            else:
+                print("Nope.")
+                error += 1
 
-    while True:
-        answer = input("Oh, and by the way, is the address valid for use on the internet? Y/N: ")
-        if answer.lower() != reserved:
-            print('You really know your shit dude!')
-            break
-        else:
-            print("Sorry man, that address is " + reserved_reason + ".")
-            print("But you're still good!")
-            break
+        while True:
+            answer = input("Oh, and by the way, is the address valid for use on the internet? Y/N: ")
+            if answer.lower() != reserved:
+                print('You really know your shit dude!')
+                break
+            else:
+                print("Sorry man, that address is " + reserved_reason + ".")
+                print("But you're still good!")
+                break
 
+def show_all(addr, mask):
+    print("This is the answer for IP-address " + str(addr) + mask)
+    nw = (ip.ip_network(str(addr) + str(mask), strict=False))
+    print('Network ID: ' + str(nw.network_address))
+    print('Netmask: ' + str(nw.netmask))
+    all_hosts = list(nw.hosts())
+    print("First host: " + str(all_hosts[0]))
+    print("Last host: " + str(all_hosts[-1]))
+    print("Broadcast address: " + str(nw.broadcast_address))
+    print("Number of available subnets: Coming soon(tm)")
+    print("Number of available hosts: " + str((nw.num_addresses - 2)))
+    print("\nNow I'm just showing off, but if you want a list of all possible addresses for this subnet, press 'L'")
+    choise = input("Else press 'Q' to quit or 'A' to play again:")
+    while True:
+        if choise == 'l':
+            for host in all_hosts:
+                print(host)
+                break
+        elif choise.lower() == 'q':
+            print('Thanks for playing!')
+            exit()
+        elif choise.lower() == 'a':
+            print("\n\n\n\n")
+            main()
 
 
 
