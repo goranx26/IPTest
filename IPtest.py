@@ -46,11 +46,11 @@ def getip():
 
 
 def test(addr, mask):
+    """Creates the answers and asks the questions"""
     nw = (ip.ip_network(str(addr) + str(mask), strict=False))
     networkID = nw.network_address
     netmask = str(nw.netmask)
-    #nr_subnets = 666
-    #all_subnets= list(nw.subnets())
+    nr_subnets = str(((32 - nw.prefixlen)**2))
     nr_hosts = (nw.num_addresses - 2)
     all_hosts = list(nw.hosts())
     first_host = all_hosts[0]
@@ -59,6 +59,7 @@ def test(addr, mask):
     error = 0
     reserved = 'n'
     reserved_reason = 'valid'
+    #THIS WILL MOVE TO OWN FUNCTION
     if nw.is_reserved:
         reserved = 'y'
         reserved_reason = 'reserved for som weird shit'
@@ -139,33 +140,48 @@ def test(addr, mask):
             print("No it doesn't.")
             error += 1
 
-        while True:
-            answer = input(pre + "What is the broadcast address for the network?: ")
-            if answer == str(broadcast):
-                print("YOU RULE!!!")
-                break
-            elif answer == 'i suck':
-                show_all(addr, mask)
-                break
-            else:
-                print("Nope.")
-                error += 1
+    while True:
+        answer = input(pre + "How many possible subnets are there?: ")
+        if answer == str(nr_subnets):
+            print("That was awesome!")
+            break
+        elif answer == 'i suck':
+            show_all(addr, mask)
+            break
+        else:
+            print("No.")
+            error += 1
 
-        while True:
-            answer = input("Oh, and by the way, is the address valid for use on the internet? Y/N: ")
-            if answer.lower() != reserved:
-                print('You really know your shit dude!')
-                break
-            elif answer == 'i suck':
-                show_all(addr, mask)
-                break
-            else:
-                print("Sorry man, that address is " + reserved_reason + ".")
-                print("But you're still good!")
-                break
+    while True:
+        answer = input(pre + "What is the broadcast address for the network?: ")
+        if answer == str(broadcast):
+            print("YOU RULE!!!")
+            break
+        elif answer == 'i suck':
+            show_all(addr, mask)
+            break
+        else:
+            print("Nope.")
+            error += 1
+
+    while True:
+        answer = input("Oh, and by the way, is the address valid for use on the internet? Y/N: ")
+        if answer.lower() != reserved:
+            print('You really know your shit dude! That adress is ' + reserved_reason + ".")
+            break
+        elif answer == 'i suck':
+            show_all(addr, mask)
+            break
+        else:
+            print("Sorry man, that address is " + reserved_reason + ".")
+            print("But you're still good!")
+            break
+
+    show_all(addr, mask)
+
 
 def show_all(addr, mask):
-    print("This is the answer for IP-address " + str(addr) + mask)
+    print("\n\nThis is the full answer for IP-address " + str(addr) + mask)
     nw = (ip.ip_network(str(addr) + str(mask), strict=False))
     print('Network ID: ' + str(nw.network_address))
     print('Netmask: ' + str(nw.netmask))
@@ -173,24 +189,23 @@ def show_all(addr, mask):
     print("First host: " + str(all_hosts[0]))
     print("Last host: " + str(all_hosts[-1]))
     print("Broadcast address: " + str(nw.broadcast_address))
-    #print("Number of available subnet-bits: " + str(32 - nw.prefixlen))
+    print("Number of possible subnets: " + str((32 - nw.prefixlen)**2))
     print("Number of available hosts: " + str((nw.num_addresses - 2)))
+
     print("\nNow I'm just showing off, but if you want a list of all possible addresses for this subnet, press 'L'")
-    choise = input("Else press 'Q' to quit or 'A' to play again:")
+    choice = input("Else press 'Q' to quit or 'A' to play again:")
     while True:
-        if choise == 'l':
+        if choice == 'l':
             for host in all_hosts:
                 print(host)
+                main()
             break
-        elif choise.lower() == 'q':
+        elif choice.lower() == 'q':
             print('Thanks for playing!')
             exit()
-        elif choise.lower() == 'a':
+        elif choice.lower() == 'a':
             print("\n\n\n\n")
             main()
-
-
-
 
 
 def main():
@@ -198,7 +213,7 @@ def main():
     testip = getip()
     addr = testip['addr']
     mask = testip['mask']
-
     test(addr, mask)
+
 
 main()
