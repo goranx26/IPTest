@@ -122,7 +122,7 @@ def test(addr, mask):
         answer = input(pre + "How many possible host does that make?: ")
         if answer == str(nr_hosts):
             print("YES!")
-            end
+            break
         else:
             print("No it doesn't.")
             error += 1
@@ -155,7 +155,7 @@ def show_all(addr, mask):
     print("First host: " + str(all_hosts[0]))
     print("Last host: " + str(all_hosts[-1]))
     print("Broadcast address: " + str(nw.broadcast_address))
-    print("Number of available subnets: Coming soon(tm)")
+    #print("Number of available subnet-bits: " + str(32 - nw.prefixlen))
     print("Number of available hosts: " + str((nw.num_addresses - 2)))
     print("\nNow I'm just showing off, but if you want a list of all possible addresses for this subnet, press 'L'")
     choise = input("Else press 'Q' to quit or 'A' to play again:")
@@ -163,7 +163,7 @@ def show_all(addr, mask):
         if choise == 'l':
             for host in all_hosts:
                 print(host)
-                break
+            break
         elif choise.lower() == 'q':
             print('Thanks for playing!')
             exit()
