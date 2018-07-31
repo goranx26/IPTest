@@ -50,7 +50,8 @@ def test(addr, mask):
     nw = (ip.ip_network(str(addr) + str(mask), strict=False))
     networkID = nw.network_address
     netmask = str(nw.netmask)
-    nr_subnets = str(((32 - nw.prefixlen)**2))
+    #FIXFIXFIX
+    #nr_subnets = str(((32 - nw.prefixlen)**2))
     nr_hosts = (nw.num_addresses - 2)
     all_hosts = list(nw.hosts())
     first_host = all_hosts[0]
@@ -140,17 +141,18 @@ def test(addr, mask):
             print("No it doesn't.")
             error += 1
 
-    while True:
-        answer = input(pre + "How many possible subnets are there?: ")
-        if answer == str(nr_subnets):
-            print("That was awesome!")
-            break
-        elif answer == 'i suck':
-            show_all(addr, mask)
-            break
-        else:
-            print("No.")
-            error += 1
+    #BROKEN
+    #while True:
+    #    answer = input(pre + "How many possible subnets are there?: ")
+    #    if answer == str(nr_subnets):
+    #        print("That was awesome!")
+    #        break
+    #    elif answer == 'i suck':
+    #        show_all(addr, mask)
+    #        break
+    #    else:
+    #        print("No.")
+    #        error += 1
 
     while True:
         answer = input(pre + "What is the broadcast address for the network?: ")
