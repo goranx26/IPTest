@@ -96,6 +96,9 @@ def test(addr, mask):
         if answer == str(netmask):
             print("It is!")
             break
+        elif answer == 'i suck':
+            show_all(addr, mask)
+            break
         else:
             print("No it is not.")
             error += 1
@@ -104,6 +107,9 @@ def test(addr, mask):
         answer = input(pre + "First host: ")
         if answer == str(first_host):
             print("Yes!")
+            break
+        elif answer == 'i suck':
+            show_all(addr, mask)
             break
         else:
             print("Nope")
@@ -114,6 +120,9 @@ def test(addr, mask):
         if answer == str(last_host):
             print("You are right again!")
             break
+        elif answer == 'i suck':
+            show_all(addr, mask)
+            break
         else:
             print("Nope.")
             error += 1
@@ -122,6 +131,9 @@ def test(addr, mask):
         answer = input(pre + "How many possible host does that make?: ")
         if answer == str(nr_hosts):
             print("YES!")
+            break
+        elif answer == 'i suck':
+            show_all(addr, mask)
             break
         else:
             print("No it doesn't.")
@@ -132,6 +144,9 @@ def test(addr, mask):
             if answer == str(broadcast):
                 print("YOU RULE!!!")
                 break
+            elif answer == 'i suck':
+                show_all(addr, mask)
+                break
             else:
                 print("Nope.")
                 error += 1
@@ -140,6 +155,9 @@ def test(addr, mask):
             answer = input("Oh, and by the way, is the address valid for use on the internet? Y/N: ")
             if answer.lower() != reserved:
                 print('You really know your shit dude!')
+                break
+            elif answer == 'i suck':
+                show_all(addr, mask)
                 break
             else:
                 print("Sorry man, that address is " + reserved_reason + ".")
