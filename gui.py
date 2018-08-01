@@ -7,6 +7,7 @@ app.title('Subnetting practice')
 
 answers = core.get_test_ip()
 
+
 def show_all():
     e[1].insert(0, answers.nw.network_address)
     e[2].insert(0, answers.nw.netmask)
@@ -28,8 +29,8 @@ def clear_all():
 
 
 def show_this(num):
-    e[num].insert(0, str(answers.nw.network_address))
-
+    entry = e[num]
+    entry.insert(0, 'apa')
 
 
 # create a menu
@@ -50,7 +51,7 @@ helpmenu.add_command(label="About...", command=core.callback)
 Label(app, text="For IP-adress: " + str(answers.nw) + " calculate the following:").grid(row=0, column=1)
 
 
-#Create the input forms
+# Create the input forms
 e = {}
 form = Frame(app)
 Label(form, text="Network-ID").grid(row=10, column=10)
@@ -91,13 +92,13 @@ Radiobutton(form, text='Nej', padx=20, variable=reserved, value='j').grid(row=90
 form.grid(row=2, column=1)
 
 
-#Create the 'show' buttons
+# Create the 'show' buttons
 for i in range(1, 8):
     show_button = Button(
         form, text="Check", width=5, command=show_this(i)).grid(row=(i * 10), column=30, padx=2, pady=2)
     i += 1
 
-#create the input validation text (right/wrong answer)
+# create the input validation text (right/wrong answer)
 grade = {}
 for i in range(1, 9):
     grade[i] = Label(form, text="").grid(row=(i * 10), column=40)
@@ -106,9 +107,9 @@ for i in range(1, 9):
 
 # create a toolbar
 toolbar = Frame(app)
-b = Button(toolbar, text="New test", width=6, command=clear_all).grid(row=0, column=0, padx=2, pady=2)
-b = Button(toolbar, text="Show all", width=6, command=show_all).grid(row=0, column=1, padx=2, pady=2)
-b = Button(toolbar, text="Clear all", width=6, command=clear_all).grid(row=0, column=2, padx=2, pady=2)
+b1 = Button(toolbar, text="New test", width=6, command=clear_all).grid(row=0, column=0, padx=2, pady=2)
+b2 = Button(toolbar, text="Show all", width=6, command=show_all).grid(row=0, column=1, padx=2, pady=2)
+b3 = Button(toolbar, text="Clear all", width=6, command=clear_all).grid(row=0, column=2, padx=2, pady=2)
 toolbar.grid(row=100, column=0, columnspan=40)
 
 
