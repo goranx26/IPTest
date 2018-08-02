@@ -29,8 +29,7 @@ def clear_all():
 
 
 def show_this(num):
-    entry = e[num]
-    entry.insert(0, 'apa')
+    e[num].insert(0, 'nu då!')
 
 
 # create a menu
@@ -94,8 +93,8 @@ form.grid(row=2, column=1)
 
 # Create the 'show' buttons
 for i in range(1, 8):
-    show_button = Button(
-        form, text="Check", width=5, command=show_this(i)).grid(row=(i * 10), column=30, padx=2, pady=2)
+
+    show_button = Button(form, text=("Check"+str(i)), width=5, command=lambda: show_this(i)).grid(row=(i * 10), column=30, padx=2, pady=2)
     i += 1
 
 # create the input validation text (right/wrong answer)
