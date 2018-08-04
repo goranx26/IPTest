@@ -2,10 +2,15 @@ from tkinter import *
 import core
 
 app = Tk()
-app.geometry("420x340")
+app.geometry("400x340")
 app.title('Subnetting practice')
-
 answers = core.get_test_ip()
+
+
+def get_new_ip():
+    clear_all()
+    new_ip = core.get_test_ip()
+    return new_ip
 
 
 def show_all():
@@ -45,6 +50,10 @@ def show_grade(num, val):
 
 
 
+
+
+
+
 # create a menu
 menu = Menu(app)
 app.config(menu=menu)
@@ -54,7 +63,7 @@ menu.add_cascade(label="Settings", menu=filemenu)
 filemenu.add_command(label="New", command=core.callback)
 filemenu.add_command(label="Choose IP", command=core.callback)
 filemenu.add_separator()
-filemenu.add_command(label="Exit", command=core.callback)
+filemenu.add_command(label="Exit", command=lambda: exit())
 
 helpmenu = Menu(menu)
 menu.add_cascade(label="Help", menu=helpmenu)
@@ -125,7 +134,7 @@ show_button6 = Button(form, text="Check", width=5, command=lambda: show_grade(6,
 
 # create a toolbar
 toolbar = Frame(app)
-b1 = Button(toolbar, text="New test", width=6, command=clear_all).grid(row=0, column=0, padx=2, pady=2)
+b1 = Button(toolbar, text="New test", width=6, command=get_new_ip).grid(row=0, column=0, padx=2, pady=2)
 b2 = Button(toolbar, text="Show all", width=6, command=show_all).grid(row=0, column=1, padx=2, pady=2)
 b3 = Button(toolbar, text="Clear all", width=6, command=clear_all).grid(row=0, column=2, padx=2, pady=2)
 toolbar.grid(row=100, column=0, columnspan=40)
