@@ -33,6 +33,10 @@ def show_this(num, val):
     e[num].insert(0, val)
 
 
+def show_grade(num):
+    grade[num] = Label(form, text="CORRECT").grid(row=(num * 10), column=40)
+
+
 # create a menu
 menu = Menu(app)
 app.config(menu=menu)
@@ -92,21 +96,23 @@ Radiobutton(form, text='Nej', padx=20, variable=reserved, value='j').grid(row=90
 form.grid(row=2, column=1)
 
 
-# Create the 'show' buttons
-show_button1 = Button(form, text=("Check"), width=5, command=lambda: show_this(1, answers.nw.network_address)).grid(row=10, column=30, padx=2, pady=2)
-show_button2 = Button(form, text=("Check"), width=5, command=lambda: show_this(2, answers.nw.network_address)).grid(row=20, column=30, padx=2, pady=2)
-show_button3 = Button(form, text=("Check"), width=5, command=lambda: show_this(3, answers.nw.network_address)).grid(row=30, column=30, padx=2, pady=2)
-show_button4 = Button(form, text=("Check"), width=5, command=lambda: show_this(4, answers.nw.network_address)).grid(row=40, column=30, padx=2, pady=2)
-show_button5 = Button(form, text=("Check"), width=5, command=lambda: show_this(5, answers.nw.network_address)).grid(row=50, column=30, padx=2, pady=2)
-show_button6 = Button(form, text=("Check"), width=5, command=lambda: show_this(6, answers.nw.network_address)).grid(row=60, column=30, padx=2, pady=2)
-show_button7 = Button(form, text=("Check"), width=5, command=lambda: show_this(7, answers.nw.network_address)).grid(row=70, column=30, padx=2, pady=2)
-#show_button8 = Button(form, text=("Check"), width=5, command=lambda: show_this(1, answers.nw.network_address)).grid(row=80, column=30, padx=2, pady=2)
-
 # create the input validation text (right/wrong answer)
 grade = {}
 for i in range(1, 9):
     grade[i] = Label(form, text="").grid(row=(i * 10), column=40)
     i += 1
+
+# Create the 'show' buttons
+show_button1 = Button(form, text="Check", width=5, command=lambda: show_grade(1)).grid(row=10, column=30, padx=2, pady=2)
+show_button2 = Button(form, text="Check", width=5, command=lambda: show_grade(2)).grid(row=20, column=30, padx=2, pady=2)
+show_button3 = Button(form, text="Check", width=5, command=lambda: show_grade(3)).grid(row=30, column=30, padx=2, pady=2)
+show_button4 = Button(form, text="Check", width=5, command=lambda: show_grade(4)).grid(row=40, column=30, padx=2, pady=2)
+show_button5 = Button(form, text="Check", width=5, command=lambda: show_grade(5)).grid(row=50, column=30, padx=2, pady=2)
+show_button6 = Button(form, text="Check", width=5, command=lambda: show_grade(6)).grid(row=60, column=30, padx=2, pady=2)
+show_button7 = Button(form, text="Check", width=5, command=lambda: show_grade(7)).grid(row=70, column=30, padx=2, pady=2)
+# show_button8 = Button(form, text="Check", width=5, command=lambda: show_this(1, answers.nw.network_address)).grid(row=80, column=30, padx=2, pady=2)
+
+
 
 
 # create a toolbar
