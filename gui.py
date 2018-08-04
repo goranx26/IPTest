@@ -33,9 +33,11 @@ def show_this(num, val):
     e[num].insert(0, val)
 
 
-def show_grade(num):
-    grade[num] = Label(form, text="CORRECT").grid(row=(num * 10), column=40)
-
+def show_grade(num, val):
+    if e[1].get() == val:
+        grade[num] = Label(form, text="CORRECT").grid(row=(num * 10), column=40)
+    else:
+        grade[num] = Label(form, text="WRONG").grid(row=(num * 10), column=40)
 
 # create a menu
 menu = Menu(app)
@@ -103,7 +105,7 @@ for i in range(1, 9):
     i += 1
 
 # Create the 'show' buttons
-show_button1 = Button(form, text="Check", width=5, command=lambda: show_grade(1)).grid(row=10, column=30, padx=2, pady=2)
+show_button1 = Button(form, text="Check", width=5, command=lambda: show_grade(1, str(e[1].get()))).grid(row=10, column=30, padx=2, pady=2)
 show_button2 = Button(form, text="Check", width=5, command=lambda: show_grade(2)).grid(row=20, column=30, padx=2, pady=2)
 show_button3 = Button(form, text="Check", width=5, command=lambda: show_grade(3)).grid(row=30, column=30, padx=2, pady=2)
 show_button4 = Button(form, text="Check", width=5, command=lambda: show_grade(4)).grid(row=40, column=30, padx=2, pady=2)
