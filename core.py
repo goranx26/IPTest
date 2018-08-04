@@ -50,7 +50,7 @@ def get_test_ip():
     testip['addr'] = oct1 + "." + oct2 + "." + oct3 + "." + oct4
     # THIS IS REALLY FUCKED
     while True:
-        testip['mask'] = "/" + str(random.randint(1, 32))
+        testip['mask'] = "/" + str(random.randint(8, 32))
         try:
             testing_with_a_nonsense_string = str(ip.ip_network(testip['addr'] + testip['mask'], strict=False))
             break

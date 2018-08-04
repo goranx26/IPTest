@@ -16,7 +16,7 @@ def show_all():
     e[4].insert(0, answers.all_hosts[-1])
     e[5].insert(0, answers.nw.broadcast_address)
     e[6].insert(0, str(answers.nw.num_addresses - 2))
-    e[7].insert(0, 'Only in paid version')
+   # e[7].insert(0, 'Only in paid version')
 
 
 def clear_all():
@@ -28,16 +28,22 @@ def clear_all():
     e[6].delete(0, END)
     e[7].delete(0, END)
 
+    for i in range(1, 9):
+        grade[i] = Label(form, text="").grid(row=(i * 10), column=40)
+        i += 1
+
 
 def show_this(num, val):
     e[num].insert(0, val)
 
 
 def show_grade(num, val):
-    if e[1].get() == val:
+    if e[num].get() == val:
         grade[num] = Label(form, text="CORRECT").grid(row=(num * 10), column=40)
     else:
         grade[num] = Label(form, text="WRONG").grid(row=(num * 10), column=40)
+
+
 
 # create a menu
 menu = Menu(app)
@@ -105,13 +111,13 @@ for i in range(1, 9):
     i += 1
 
 # Create the 'show' buttons
-show_button1 = Button(form, text="Check", width=5, command=lambda: show_grade(1, str(e[1].get()))).grid(row=10, column=30, padx=2, pady=2)
-show_button2 = Button(form, text="Check", width=5, command=lambda: show_grade(2)).grid(row=20, column=30, padx=2, pady=2)
-show_button3 = Button(form, text="Check", width=5, command=lambda: show_grade(3)).grid(row=30, column=30, padx=2, pady=2)
-show_button4 = Button(form, text="Check", width=5, command=lambda: show_grade(4)).grid(row=40, column=30, padx=2, pady=2)
-show_button5 = Button(form, text="Check", width=5, command=lambda: show_grade(5)).grid(row=50, column=30, padx=2, pady=2)
-show_button6 = Button(form, text="Check", width=5, command=lambda: show_grade(6)).grid(row=60, column=30, padx=2, pady=2)
-show_button7 = Button(form, text="Check", width=5, command=lambda: show_grade(7)).grid(row=70, column=30, padx=2, pady=2)
+show_button1 = Button(form, text="Check", width=5, command=lambda: show_grade(1, str(answers.nw.network_address))).grid(row=10, column=30, padx=2, pady=2)
+show_button2 = Button(form, text="Check", width=5, command=lambda: show_grade(2, str(answers.nw.netmask))).grid(row=20, column=30, padx=2, pady=2)
+show_button3 = Button(form, text="Check", width=5, command=lambda: show_grade(3, str(answers.all_hosts[0]))).grid(row=30, column=30, padx=2, pady=2)
+show_button4 = Button(form, text="Check", width=5, command=lambda: show_grade(4, str(answers.all_hosts[-1]))).grid(row=40, column=30, padx=2, pady=2)
+show_button5 = Button(form, text="Check", width=5, command=lambda: show_grade(5, str(answers.nw.broadcast_address))).grid(row=50, column=30, padx=2, pady=2)
+show_button6 = Button(form, text="Check", width=5, command=lambda: show_grade(6, str(answers.nw.num_addresses - 2))).grid(row=60, column=30, padx=2, pady=2)
+# show_button7 = Button(form, text="Check", width=5, command=lambda: show_grade(7)).grid(row=70, column=30, padx=2, pady=2)
 # show_button8 = Button(form, text="Check", width=5, command=lambda: show_this(1, answers.nw.network_address)).grid(row=80, column=30, padx=2, pady=2)
 
 
