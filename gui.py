@@ -9,6 +9,7 @@ answers = core.get_test_ip()
 
 
 def show_all():
+    clear_all()
     e[1].insert(0, answers.nw.network_address)
     e[2].insert(0, answers.nw.netmask)
     e[3].insert(0, answers.all_hosts[0])
@@ -28,8 +29,8 @@ def clear_all():
     e[7].delete(0, END)
 
 
-def show_this(num):
-    e[num].insert(0, 'nu då!')
+def show_this(num, val):
+    e[num].insert(0, val)
 
 
 # create a menu
@@ -92,10 +93,14 @@ form.grid(row=2, column=1)
 
 
 # Create the 'show' buttons
-for i in range(1, 8):
-
-    show_button = Button(form, text=("Check"+str(i)), width=5, command=lambda: show_this(i)).grid(row=(i * 10), column=30, padx=2, pady=2)
-    i += 1
+show_button1 = Button(form, text=("Check"), width=5, command=lambda: show_this(1, answers.nw.network_address)).grid(row=10, column=30, padx=2, pady=2)
+show_button2 = Button(form, text=("Check"), width=5, command=lambda: show_this(2, answers.nw.network_address)).grid(row=20, column=30, padx=2, pady=2)
+show_button3 = Button(form, text=("Check"), width=5, command=lambda: show_this(3, answers.nw.network_address)).grid(row=30, column=30, padx=2, pady=2)
+show_button4 = Button(form, text=("Check"), width=5, command=lambda: show_this(4, answers.nw.network_address)).grid(row=40, column=30, padx=2, pady=2)
+show_button5 = Button(form, text=("Check"), width=5, command=lambda: show_this(5, answers.nw.network_address)).grid(row=50, column=30, padx=2, pady=2)
+show_button6 = Button(form, text=("Check"), width=5, command=lambda: show_this(6, answers.nw.network_address)).grid(row=60, column=30, padx=2, pady=2)
+show_button7 = Button(form, text=("Check"), width=5, command=lambda: show_this(7, answers.nw.network_address)).grid(row=70, column=30, padx=2, pady=2)
+#show_button8 = Button(form, text=("Check"), width=5, command=lambda: show_this(1, answers.nw.network_address)).grid(row=80, column=30, padx=2, pady=2)
 
 # create the input validation text (right/wrong answer)
 grade = {}
