@@ -21,7 +21,8 @@ def show_all():
     e[4].insert(0, answers.all_hosts[-1])
     e[5].insert(0, answers.nw.broadcast_address)
     e[6].insert(0, str(answers.nw.num_addresses - 2))
-   # e[7].insert(0, 'Only in paid version')
+    # e[7].insert(0, 'Only in paid version')
+    app.update_idletasks()
 
 
 def clear_all():
@@ -36,6 +37,7 @@ def clear_all():
     for i in range(1, 9):
         grade[i] = Label(form, text="").grid(row=(i * 10), column=40)
         i += 1
+    app.update()
 
 
 def show_this(num, val):
@@ -69,7 +71,7 @@ helpmenu = Menu(menu)
 menu.add_cascade(label="Help", menu=helpmenu)
 helpmenu.add_command(label="About...", command=core.callback)
 
-Label(app, text="For IP-adress: " + str(answers.nw) + " calculate the following:").grid(row=0, column=1)
+labelIP = Label(app, text="For IP-adress: " + str(answers.nw) + " calculate the following:").grid(row=0, column=1)
 
 
 # Create the input forms
